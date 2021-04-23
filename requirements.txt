@@ -1,0 +1,6 @@
+yfinance
+flask
+pillow
+beautifulsoup4
+googlesearch-python
+requests

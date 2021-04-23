@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.1.1/dist/chart.min.js"></script>
+    <title>Stocks</title>
+</head>
+<body>
+    <h1>{{ data['longName'] }}</h1>
+    <img src={{url_for('static', filename=data['logo']) }} alt="Logo" width="75" height="75">
+    <p>{{ data['industry'] }}</p>
+    <p>{{ data['location'] }}</p>
+    <p>{{ data['longBusinessSummary'] }}</p>
+    <p><a href="{{ data['website'] }}">{{ data['website'] }}</a></p>
+    <p>{{ data['regularMarketPrice'] }}</p>
+
+    <div>
+        <canvas id="myChart" width=500" height="200" style="border:1px solid"></canvas>
+    </div>
+
+    <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ data['chart'][0] }},
+            datasets: [
+                {
+                    label: "stock price",
+                    data: {{ data['chart'][1] }},
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }
+            ]
+        }
+    });
+    </script>
+
+    <h2>Stock News for {{ data['longName'] }}</h2>
+    {% for link in data['news'] %}
+    <p><a href="{{ link }}">{{ link }}</a></p>
+    {% endfor %}
+
+    <p>
+        <a href={{url_for('index')}}>Back</a>
+    </p>
+</body>
+</html>
