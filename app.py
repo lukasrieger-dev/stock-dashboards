@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from Stock import Stock
 from pymongo import MongoClient
 
@@ -15,7 +15,8 @@ collection_depots = None
 
 @app.route('/')
 def index():
-    return render_template('index.html', symbols=symbols), 200
+    depot_names = [entry['Name'] for entry in collection_depots.find()]
+    return render_template('index.html', symbols=symbols, depots=depot_names), 200
 
 
 @app.route('/dashboard/<string:ticker>')
@@ -28,15 +29,25 @@ def dashboard(ticker=None):
     return render_template('dashboard.html', data=stock_data), 200
 
 
-@app.route('/newdepot/<string:depot_name>')
-def new_depot(depot_name=None):
-    if not depot_name:
-        return jsonify('Enter a name'), 422
-    else:
-        r = collection_depots.insert_one({
-            'Name': depot_name
-        })
-        return render_template('depot.html', depot_name=depot_name), 200
+@app.route('/depot', methods=['GET', 'POST'])
+def depot():
+    if request.method == 'POST':
+        depot_name = request.form['depot_name']
+        if not depot_name:
+            return jsonify('Enter a name'), 422
+        else:
+            r = collection_depots.insert_one({
+                'Name': depot_name
+            })
+            print(f'Insert new depot {depot_name} with id: ', r.inserted_id)
+    if request.method == 'GET':
+        depot_name = request.args.get('depot_name')
+    return render_template('depot.html', depot_name=depot_name), 200
+
+
+@app.route('/newdepot')
+def new_depot():
+    return render_template('newdepot.html'), 200
 
 
 def _init_app(file_name):

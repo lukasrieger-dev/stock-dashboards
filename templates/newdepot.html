@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stocks</title>
+</head>
+<body>
+    <form action="{{ url_for('depot') }}" method="post">
+        <label for="depotname">Depot name:</label>
+        <input type="text" id="depotname" name="depot_name"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

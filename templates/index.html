@@ -15,7 +15,10 @@
 
     <h1>Depots</h1>
     <p>
-        <a href={{url_for('new_depot', depot_name="Lukas")}}>New depot</a><br>
+        {% for depot_name in depots %}
+        <a href={{url_for('depot', depot_name=depot_name)}}>{{ depot_name }}</a><br>
+        {% endfor %}
+        <a href={{url_for('new_depot')}}>New depot</a><br>
     </p>
 </body>
 </html>
