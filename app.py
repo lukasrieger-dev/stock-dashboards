@@ -12,6 +12,10 @@ client = None
 db = None
 collection_depots = None
 
+"""
+Todos:  DB Zugriff in Depot Klasse umziehen
+        Login-Seite mit OAuth implementieren -> Gibt es dann mehrere Users?
+"""
 
 @app.route('/')
 def index():
