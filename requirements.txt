@@ -4,3 +4,4 @@ pillow
 beautifulsoup4
 googlesearch-python
 requests
+pymongo

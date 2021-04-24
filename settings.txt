@@ -1,0 +1,13 @@
+#settings
+url=mongodb://root:root@localhost:27017
+dbname=stocks_database
+collection=depots
+
+#stocks
+Ehang=EH
+Neometals=RDRUY
+American Manganese=AMYZF
+Nel Asa=NLLSF
+BYD=BYDDF
+Nano Dimension=NNDM
+Xiao Peng=XPENG

@@ -5,16 +5,17 @@
     <title>Stocks</title>
 </head>
 <body>
-    <h1>Stock Dashboards</h1>
+    <h1>Stocks</h1>
     <p>Select one of the companies listed below to see the stock dashboard</p>
     <p>
-        <a href={{url_for('dashboard', ticker="EH")}}>Ehang</a><br>
-        <a href={{url_for('dashboard', ticker="RDRUY")}}>Neometals</a><br>
-        <a href={{url_for('dashboard', ticker="AMYZF")}}>American Manganese</a><br>
-        <a href={{url_for('dashboard', ticker="NLLSF")}}>Nel Asa</a><br>
-        <a href={{url_for('dashboard', ticker="BYDDF")}}>BYD</a><br>
-        <a href={{url_for('dashboard', ticker="NNDM")}}>Nano Dimension</a><br>
-        <a href={{url_for('dashboard', ticker="XPEV")}}>XPENG</a><br>
+        {% for entry in symbols.items() %}
+        <a href={{url_for('dashboard', ticker=entry[1])}}>{{ entry[0] }}</a><br>
+        {% endfor %}
+    </p>
+
+    <h1>Depots</h1>
+    <p>
+        <a href={{url_for('new_depot', depot_name="Lukas")}}>New depot</a><br>
     </p>
 </body>
 </html>
